@@ -16,8 +16,9 @@ https://docs.qq.com/doc/DQ2RmRmJ0QnBDd2xr
 11.没有任何收费内容
 12.没有任何收费工具
 QQ群：1018208491（起源于2018-中国人建议在此交流）
-网盘：https://lvzhu.lanzoub.com/b0mmm8ji(起源于2018)
-联络：https://discord.gg/ZudaZ76w9e(不管不问)
+网盘(起源于2018)：https://lvzhu.lanzoub.com/b0mmm8ji
+
+联络(不管不问)：https://discord.gg/ZudaZ76w9e
 一键转换工具：https://lvzhu.lanzoub.com/iLUEw2j3fstc
 
 
@@ -38,8 +39,8 @@ I declare that:
 10. There are no charging items
 11. There is no charging content
 12. There are no charging tools available
-Online storage: https://lvzhu.lanzoub.com/b0mmm8ji (Originating from 2018)
-Contact: https://discord.gg/ZudaZ76w9e (No matter what)
+Online storage (Originating from 2018): https://lvzhu.lanzoub.com/b0mmm8ji
+Contact (No matter what): https://discord.gg/ZudaZ76w9e
 One click conversion tool: https://lvzhu.lanzoub.com/iLUEw2j3fstc
 
 
