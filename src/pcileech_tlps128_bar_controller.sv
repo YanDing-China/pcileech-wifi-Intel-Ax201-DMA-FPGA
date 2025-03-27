@@ -187,7 +187,7 @@ module pcileech_tlps128_bar_controller(
         .rd_req_addr    ( rd_req_addr                   ),
         .rd_req_valid   ( rd_req_valid && rd_req_bar[5] ),
         .rd_rsp_ctx     ( bar_rsp_ctx[5]                ),
-        .rd_rsp_data    ( bar_rs_data[5]               ),
+        .rd_rsp_data    ( bar_rsp_data[5]               ),
         .rd_rsp_valid   ( bar_rsp_valid[5]              )
 		// 注本人不出任何固件，不卖任何固件，不做任何固件，不加任何好友，没有任何联系方式，切勿用于非法盈利，仅供学习交流使用。
 		// 教程：https://docs.qq.com/doc/DQ01lVGtHelROVHNv
@@ -793,8 +793,8 @@ module pcileech_bar_impl_Bar0_Ax201_wifi(
 	*/
 	/*
 	//  FH中断原因   用不到的先屏蔽 防止内存溢出
-    localparam CSR_INT_BIT_ALIVE                 = 1 << 0;    // uCode初始化后产生的中断
-    localparam CSR_INT_BIT_WAKEUP                = 1 << 1;    // NIC控制器唤醒（电源管理）
+        localparam CSR_INT_BIT_ALIVE                 = 1 << 0;    // uCode初始化后产生的中断
+        localparam CSR_INT_BIT_WAKEUP                = 1 << 1;    // NIC控制器唤醒（电源管理）
 	
 	localparam CSR_INT_BIT_SW_RX                 = 1 << 3;    // 持续数据接收
 	localparam CSR_INT_BIT_RX_PERIODIC           = 1 << 28;   // Rx周期性
@@ -814,8 +814,8 @@ module pcileech_bar_impl_Bar0_Ax201_wifi(
 	localparam CSR_FH_INT_BIT_TX_CHNL1           = 1 << 1;    // Tx通道1
 	localparam CSR_FH_INT_BIT_RX_CHNL0           = 1 << 16;   // Rx通道0
 	localparam CSR_FH_INT_BIT_RX_CHNL1           = 1 << 17;   // Rx通道1
-    localparam CSR_FH_INT_BIT_HI_PRIOR           = 1 << 30;   // 高优先级Rx，绕过合并
-    localparam CSR_FH_INT_BIT_ERR                = 1 << 31;   // 错误
+        localparam CSR_FH_INT_BIT_HI_PRIOR           = 1 << 30;   // 高优先级Rx，绕过合并
+        localparam CSR_FH_INT_BIT_ERR                = 1 << 31;   // 错误
     
 	
 	//MSIX  中断原因  FH是软件(内部)中断，HW是硬件(外部)中断  
@@ -840,8 +840,6 @@ module pcileech_bar_impl_Bar0_Ax201_wifi(
 	localparam MSIX_FH_INT_CAUSES_D2S_CH0_NUM    = 1 << 16;   // D2S 通道 0 数量  数据传输中断
 	localparam MSIX_HW_INT_CAUSES_REG_FH_TX      = 1 << 27;   // FH发送     	  数据发送中断
 	localparam MSIX_HW_INT_CAUSES_REG_HAP        = 1 << 30;   // 电源中断
-	
-	
 
 	reg [31:0] CSR_MAC_ADDR0   = 32'h0534C286;
 	reg [31:0] CSR_MAC_ADDR1   = 32'h00008048;
@@ -874,25 +872,23 @@ module pcileech_bar_impl_Bar0_Ax201_wifi(
     always @ (posedge clk) begin
 		rd_rsp_ctx    <= rd_req_ctx;
 		rd_rsp_valid  <= rd_req_valid;
-		
-		
-		
-		// 中断逻辑
 
+		// 中断逻辑
 
 
 		//下面是各类型的中断
 
 
-
-
-
 		//先与驱动进行通讯交互，这样真实性更加安全保证
-		
-		
-		
-		
-		//终于完成了，开撸他MD！
+                //请注意，以下数据源于RW工具采集保存为Bin然后转换为源码，该数据仅供自用，部分电脑是不支持的；
+	        //请注意，一切以群文档教程： https://docs.qq.com/doc/DQ01lVGtHelROVHNv
+	        //请注意，因设备问题，最好是使用mmio得其数据，然后在结合此数据，才是最佳选择；
+	        //请注意，本源码的作用和目的：仅提供一种写法而已；
+	        //请注意，正常设备是什么样子，你的设备也应该是什么样子，这样才能正确搭配
+	        //请自行根据工具：https://lvzhu.lanzoub.com/iyXDH2rfcsza
+	        //请注意：本群网盘资料 2018年至今：https://lvzhu.lanzoub.com/b0mmm8ji
+	        //请注意：网盘如果打不开，请搜索：蓝奏云；打开网页后，在后缀添加：/b0mmm8ji  即可
+
 		if ((base_address_register > 0) && (base_address_register < 32'hFFFF0000)) begin
 			rd_addr_cmp    <= ((rd_req_addr - (base_address_register & 32'hFFFFFFF0)) & 32'hFFFF);
 			if (rd_req_valid) begin 
@@ -900,7 +896,7 @@ module pcileech_bar_impl_Bar0_Ax201_wifi(
 					case (rd_addr_cmp)
 						16'h0000 : rd_rsp_data <= 32'h00C80000;//CSR_HW_IF_CONFIG_REG 硬件接口配置，用于设置硬件接口相关参数
 						16'h0004 : rd_rsp_data <= 32'h00000046;//CSR_INT_COALESCING 中断合并，可能涉及中断信号的整合处理
-						16'h0008 : rd_rsp_data <= 32'h00000000; //CSR_INT 主机中断状态 / 确认，用于查看或确认主机中断情况
+						16'h0008 : rd_rsp_data <= 32'h00000000;//CSR_INT 主机中断状态 / 确认，用于查看或确认主机中断情况
 						16'h000C : rd_rsp_data <= 32'h00000000;//CSR_INT_MASK 主机中断使能，控制主机中断是否生效
 						16'h0010 : rd_rsp_data <= 32'h00000000;//CSR_FH_INT_STATUS 总线主控中断状态 / 确认，关乎总线主控的中断相关状态及确认操作
 						16'h0014 : rd_rsp_data <= 32'h00000000;
